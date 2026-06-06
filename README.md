@@ -1,8 +1,6 @@
 # SatanDS DuShengCDN Commercial Releases
 
-DuShengCDN 商业版二进制发布仓库。本仓库只发布可交付安装包、安装脚本、SHA-256 校验文件和 Release 元数据，不发布商业源码。
-
-> 商业源码位于私有仓库；客户服务器、Agent 和 DNS Worker 不需要 GitHub token，也不应该持有授权签发私钥。
+DuShengCDN 商业版二进制发布仓库。本仓库只发布可交付安装包、安装脚本、SHA-256 校验文件和 Release 元数据。
 
 
 ## 商业版功能
