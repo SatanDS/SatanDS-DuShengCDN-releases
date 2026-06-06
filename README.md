@@ -128,7 +128,7 @@ curl -fsSL https://github.com/SatanDS/SatanDS-DuShengCDN-releases/releases/lates
 系统治理 -> 商业授权
 ```
 
-粘贴 `dscdn_license_v1...` 授权 token，面板会向 `https://www.satandu.com` 发起在线激活，成功后获得短期签名租约。租约默认有效 72 小时，到期前 6 小时自动续约。
+粘贴 `dscdn_license_v1...` 授权 token，面板会向授权服务器发起在线激活，成功后获得签名租约。
 
 ## 常用安装参数
 
