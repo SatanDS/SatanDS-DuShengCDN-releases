@@ -270,23 +270,14 @@ docker run -d --name dushengcdn-dns-worker --restart unless-stopped \
 
 只使用来源 CIDR 或全局调度时可以省略 GeoIP。
 
-源码运行示例：
-
+触发DNS运营商分流库更新：
 ```bash
-cd dushengcdn_server
-go run ./cmd/dns-worker \
-  --server-url https://cdn.example.com \
-  --token YOUR_DNS_WORKER_TOKEN \
-  --listen :53 \
-  --query-rate-limit 200 \
-  --udp-response-size 1232
+systemctl start dushengcdn-dns-worker-source-database-update.service
+systemctl status dushengcdn-dns-worker-source-database-update.service
 ```
-
-验证示例：
-
+查看 7 天DNS运营商自动更新定时器：
 ```bash
-dig @YOUR_DNS_WORKER_IP example.com SOA
-dig @YOUR_DNS_WORKER_IP www.example.com A
+systemctl list-timers '*source-database*'
 ```
 
 生产环境建议至少部署两个 DNS Worker，并同时放行 UDP/TCP `53`。如果安装脚本或 Docker 启动提示 `address already in use` / 端口占用，先用 `ss -lntu '( sport = :53 )'` 或 `lsof -nP -i :53` 找到占用者；常见占用来自 `systemd-resolved`、`named` 或 `dnsmasq`。Worker 本地快照缓存会写入 SHA-256 checksum 元数据，启动加载时会校验完整性，并从快照中的 GSLB 防抖状态恢复最近可用选择；运行中产生的新防抖状态会随 heartbeat 批量回传 Server，同时兼容旧版本生成的裸快照 JSON。Worker 默认按来源 IP 每秒限制 `200` 次查询，并把 UDP 响应上限限制为 `1232` 字节；超大响应会设置 TC 位让递归解析器回退 TCP。安装脚本会默认准备本地 Country MMDB；如果使用 Docker 或源码方式部署且要按国家代码匹配 GSLB 节点池，需要自行配置本地 MaxMind Country MMDB。如果在节点池里配置来源 CIDR，则会优先按来源 IP/ECS 命中 `cidr:...` 作用域；启用 `weighted` 或 `load_aware` 时会追加 `|bucket:xx` 分流桶，未命中且无法识别国家时会回退到 `global` 作用域。
