@@ -27,16 +27,6 @@
 https://github.com/SatanDS/SatanDS-DuShengCDN-releases/releases
 
 当前正式版为 `v1.0.0`。`/releases/latest` 指向该版本，所有 Server、Agent、DNS Worker 二进制和安装脚本都带同名 `.sha256` 与 `.sig`。
-
-## 安全边界
-
-客户拥有本机 root/Administrator 权限时，任何本地二进制都无法绝对防止反编译、补丁或运行时绕过。DuShengCDN 商业版的保护目标是：
-
-- 强在线授权、短租约续期和吊销审计。
-- release 签名、SHA-256 校验和安装器内置公钥。
-- `garble -literals` 混淆与商业模式构建标记。
-- 不在客户包中包含 license issuer 私钥。
-
 请不要从未知来源下载二进制，也不要手工替换缺少 `.sha256` 或 `.sig` 的文件。
 
 ## 部署前准备
