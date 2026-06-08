@@ -1,7 +1,5 @@
 # SatanDS DuShengCDN Commercial Releases
 
-DuShengCDN 商业版二进制发布仓库。本仓库只发布可交付安装包、安装脚本、SHA-256 校验文件和 Release 元数据。
-
 
 ## 商业版功能
 
