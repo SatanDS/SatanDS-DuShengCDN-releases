@@ -324,13 +324,12 @@ systemctl status dushengcdn-dns-worker --no-pager
 - 系统时间应保持准确，建议启用 NTP。
 - 授权会绑定机器指纹；换机、迁移或重装后可能需要走 rehost 或重新激活流程。
 - 授权到期、租约续期失败、授权被吊销或机器绑定不匹配时，商业能力可能被限制。
-- 客户包只包含程序、安装脚本、校验文件和验签所需公钥，不包含授权签发材料。
+- 客户包只包含程序、安装脚本、校验文件和验签所需公钥。
 
 ## 安全与备份建议
 
 - 始终从 `SatanDS/SatanDS-DuShengCDN-releases` 下载资产。
 - 不要混用不同版本的程序文件、`.sha256` 和 `.sig`。
-- 不要把授权 token、root 密码、数据库密码写进工单、聊天记录或公开截图。
 - 面板建议只通过 HTTPS 暴露，Server 后端端口绑定本机或内网。
 - `TRUSTED_PROXIES` 只填写受控反向代理 IP/CIDR。
 - Agent 节点建议独占 80/443，不要和其它 Web 服务混用同一套 OpenResty 配置目录。
