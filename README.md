@@ -1,50 +1,81 @@
-# SatanDS DuShengCDN Commercial Releases
+# DuShengCDN 商业版
 
+DuShengCDN 是面向自托管边缘节点的 CDN 管理平台。它把站点、源站、证书、节点、缓存、访问观测、配置发布和自建权威 DNS 放在同一个管理面板里，适合需要自己掌控边缘机器、证书和调度策略的团队。
 
-## 商业版功能
-
-商业版包含完整源码构建出的二进制能力：
-
-- 商业授权：客户侧支持安装商业授权 token、查看授权状态、展示节点/站点额度、在线激活。
-- 商业更新：面板右上角版本入口检查本仓库 Release。
-- 全球态势板：节点在线率、运行健康、窗口请求、资源压力、带宽峰值和缓存命中率总览。
-- 网站配置：反向代理站点、多域名、源站池、负载均衡、缓存策略、CC 防护、地区限制、认证配置和发布流程。
-- 配置发布：支持草稿变更、发布摘要、配置版本、激活、历史记录和回滚。
-- Agent/OpenResty：节点自动注册、配置拉取、OpenResty reload、失败回滚、健康上报、缓存清理和预热。
-- 边缘资源：节点池、公网 IP 池、池内权重、排空状态、调度开关、节点健康和最近应用状态。
-- 智能解析：Cloudflare 自动解析、本地自建权威 DNS、多节点智能解析、GSLB 调度、权重分流和冷却防抖。
-- DNS 观测：查询量、成功率、动态解析、错误查询、SERVFAIL/NXDOMAIN 趋势、来源作用域、响应目标和 Worker 健康。
-- DNS Worker：权威 DNS UDP/TCP 响应、快照一致性、GeoIP/CIDR/CN运营商 匹配分流、查询限速、UDP 截断保护和 NS/Glue 辅助检查。
-- TLS 证书：证书托管、ACME 申请、域名资产管理和站点证书绑定。
-- 访问观测：访问日志、请求趋势、TOP URL/IP/地区、节点可用率、资源快照和健康事件。
-- 系统治理：个人设置、运行参数、商业授权、认证与安全、数据保留和品牌公告集中管理。
-- 生产安全：Release 二进制发布、SHA-256 校验、构建裁剪、混淆、水印和不下发 GitHub token 的更新链路。
-
-
-
-商业正式版发布仓库：
+商业正式版发布页：
 
 https://github.com/SatanDS/SatanDS-DuShengCDN-releases/releases
 
-当前正式版为 `v1.0.0`。`/releases/latest` 指向该版本，所有 Server、Agent、DNS Worker 二进制和安装脚本都带同名 `.sha256` 与 `.sig`。
-请不要从未知来源下载二进制，也不要手工替换缺少 `.sha256` 或 `.sig` 的文件。
+当前正式版：`v1.0.0`
+
+## 功能亮点
+
+- **统一管理面板**：集中管理网站配置、源站、TLS 证书、节点、节点池、公网 IP 池、配置版本和操作记录。
+- **边缘 Agent 托管**：Agent 在边缘节点接入面板，负责心跳、配置同步、OpenResty 应用、reload、失败回滚、缓存清理和运行状态上报。
+- **完整版本发布**：每次发布都会生成完整配置版本。历史版本不可变，回滚通过重新激活旧版本完成。
+- **HTTPS 与证书管理**：支持上传证书，也支持托管证书流程；证书按域名绑定，适合一个站点包含多个域名的场景。
+- **缓存与运行时操作**：支持按 URL、后缀、路径前缀、路径包含、路径多片段等规则缓存，并可从面板下发缓存清理和预热。
+- **Cloudflare 与自建解析**：既可同步 Cloudflare A/AAAA 记录，也可部署 DNS Worker 自建权威 DNS。
+- **GSLB 智能调度**：自建解析模式下可按来源 IP/ECS、来源网段、国家、ASN、运营商、节点池权重、节点健康和压力指标返回边缘 IP。
+- **可观测能力**：面板展示节点在线状态、应用记录、访问日志、缓存命中率、状态码分布、TOP URL/IP、节点流量和 DNS 响应端健康状态。
+- **签名发布资产**：发布页中的程序文件和安装脚本都带同名 `.sha256` 与 `.sig`，安装和升级时会校验来源与完整性。
+- **商业授权**：商业 Server 需要有效授权并保持在线激活租约，支持授权到期、吊销和换机流程。
+
+## 界面预览
+
+截图请放在 `docs/assets/readme/`。之后替换截图时也建议继续使用下列文件名，README 会自动引用新图。
+
+| 预览 | 文件位置 |
+| --- | --- |
+| 管理面板总览 | `docs/assets/readme/dashboard-overview.png` |
+| 网站/代理路由详情 | `docs/assets/readme/proxy-route-detail.png` |
+| 节点详情与状态 | `docs/assets/readme/node-detail.png` |
+
+![管理面板总览](docs/assets/readme/dashboard-overview.png)
+
+![网站和代理路由详情](docs/assets/readme/proxy-route-detail.png)
+
+![节点详情与状态](docs/assets/readme/node-detail.png)
+
+## 发布资产说明
+
+在 GitHub Releases 中，每个主资产都应同时存在同名 `.sha256` 和 `.sig` 文件。请始终从官方 release 页下载安装脚本和程序文件，不要混用不同版本的资产。
+
+| 资产 | 用途 |
+| --- | --- |
+| `install-commercial.sh` | Linux Server 一键安装脚本 |
+| `install-agent.sh` | Linux Agent 一键安装脚本 |
+| `install-dns-worker.sh` | Linux DNS Worker 一键安装脚本 |
+| `dushengcdn-server-linux-amd64` / `linux-arm64` | Linux Server 程序文件 |
+| `dushengcdn-server-darwin-amd64` / `darwin-arm64` | macOS Server 程序文件 |
+| `dushengcdn-server-windows-amd64.exe` | Windows Server 程序文件 |
+| `dushengcdn-agent-linux-amd64` / `linux-arm64` | Linux Agent 程序文件 |
+| `dushengcdn-agent-darwin-amd64` / `darwin-arm64` | macOS Agent 程序文件 |
+| `dushengcdn-dns-worker-linux-amd64` / `linux-arm64` | Linux DNS Worker 程序文件 |
+| `dushengcdn-dns-worker-darwin-amd64` / `darwin-arm64` | macOS DNS Worker 程序文件 |
+| `dushengcdn-dns-worker-windows-amd64.exe` | Windows DNS Worker 程序文件 |
+| `*.sha256` | 对应资产的 SHA-256 校验文件 |
+| `*.sig` | 对应资产的 release 签名文件 |
+
+Linux + systemd 环境推荐使用安装脚本。其它平台可以下载对应程序文件，并按自己的服务管理方式运行。
 
 ## 部署前准备
 
 推荐环境：
 
-- Linux x86_64 或 arm64，systemd。
-- 公网可访问的域名，例如 `cdn.example.com`。
-- HTTPS 反向代理，推荐同源代理 `/` 和 `/api`。
-- Server 建议 2 核 4 GB 起步；边缘 Agent 节点建议独占 80/443。
-- DNS Worker 需要公网 UDP/TCP 53，且域名 NS 已委派到对应响应端。
+- Linux x86_64 或 arm64，使用 systemd 管理服务。
+- 一个公网可访问的面板域名，例如 `cdn.example.com`。
+- 面板域名的 TLS 证书，以及 Nginx/OpenResty/宝塔等 HTTPS 反向代理。
+- Server 建议从 2 核 4 GB 起步。
+- Agent 边缘节点建议独占 80/443 端口。
+- DNS Worker 需要公网 UDP/TCP 53 可达，并在域名注册商处完成 NS 委派。
 
-必须准备：
+安装前请准备：
 
-- 商业授权 token 或授权服务提供的激活信息。
-- 管理面板域名和 TLS 证书。
-- 节点注册 token：在面板创建节点或开启发现注册后获得。
-- DNS Worker token：在面板的自建解析页面创建响应端后获得。
+- 商业授权 token，或授权服务提供的激活信息。
+- 管理面板域名和证书。
+- Agent 接入 token：在面板创建节点或开启发现注册后获得。
+- DNS Worker token：在面板的本地自建解析页面创建响应端后获得。
 
 ## 安装 Server
 
@@ -56,7 +87,16 @@ curl -fsSL https://github.com/SatanDS/SatanDS-DuShengCDN-releases/releases/lates
   --activation-url https://www.satandu.com
 ```
 
-安装固定版本：
+如果已经拿到商业授权 token，可在安装时一并写入并请求激活：
+
+```bash
+curl -fsSL https://github.com/SatanDS/SatanDS-DuShengCDN-releases/releases/latest/download/install-commercial.sh | bash -s -- \
+  --http-port 3010 \
+  --activation-url https://www.satandu.com \
+  --license-token YOUR_LICENSE_TOKEN
+```
+
+安装指定版本：
 
 ```bash
 curl -fsSL https://github.com/SatanDS/SatanDS-DuShengCDN-releases/releases/latest/download/install-commercial.sh | bash -s -- \
@@ -67,26 +107,30 @@ curl -fsSL https://github.com/SatanDS/SatanDS-DuShengCDN-releases/releases/lates
   --activation-url https://www.satandu.com
 ```
 
-常用路径：
+安装完成后常用路径：
 
-- 程序目录：`/opt/dushengcdn`
-- 配置文件：`/opt/dushengcdn/dushengcdn.env`
-- systemd 服务：`dushengcdn.service`
-- 默认监听：`127.0.0.1:3010` 或安装器配置的端口
+| 项目 | 默认值 |
+| --- | --- |
+| 安装目录 | `/opt/dushengcdn` |
+| 配置文件 | `/opt/dushengcdn/dushengcdn.env` |
+| 数据目录 | `/opt/dushengcdn/data` |
+| 日志目录 | `/opt/dushengcdn/logs` |
+| systemd 服务 | `dushengcdn.service` |
+| 面板端口 | `127.0.0.1:3010` 或安装时指定的端口 |
 
 常用命令：
 
 ```bash
-systemctl status dushengcdn
+systemctl status dushengcdn --no-pager
 journalctl -u dushengcdn -f
 systemctl restart dushengcdn
 ```
 
-首次登录使用 `root` 账户。完成首登后请立即修改密码，并确认授权状态为已激活。
+首次登录使用 `root` 账户。安装脚本会在结束时打印面板地址和初始 root 密码；登录后请立即修改密码，并妥善保护 `/opt/dushengcdn/dushengcdn.env`。
 
-## HTTPS 反向代理
+## 配置 HTTPS 反向代理
 
-生产环境推荐只让 Server 监听本机端口，再用 Nginx/OpenResty 代理 HTTPS：
+生产环境建议让 Server 只监听本机端口，再用 HTTPS 反向代理对外服务：
 
 ```nginx
 server {
@@ -109,7 +153,7 @@ server {
 }
 ```
 
-Server 只会在 `TRUSTED_PROXIES` 命中时信任 forwarded headers。反代与 Server 同机时，通常设置：
+反向代理与 Server 同机时，通常在 `/opt/dushengcdn/dushengcdn.env` 中设置：
 
 ```env
 TRUSTED_PROXIES=127.0.0.1,::1
@@ -117,9 +161,17 @@ SESSION_COOKIE_SECURE=true
 SESSION_COOKIE_SAME_SITE=lax
 ```
 
+修改配置后重启服务：
+
+```bash
+systemctl restart dushengcdn
+```
+
 ## 安装 Agent
 
-在面板中创建节点，复制发现注册 token 或节点专属 token，然后在边缘节点执行：
+Agent 负责接入边缘节点。它不接收远程 shell 指令，只会拉取面板发布的配置，在本机应用 OpenResty 并上报结果。
+
+使用发现注册 token：
 
 ```bash
 curl -fsSL https://github.com/SatanDS/SatanDS-DuShengCDN-releases/releases/latest/download/install-agent.sh | bash -s -- \
@@ -127,7 +179,7 @@ curl -fsSL https://github.com/SatanDS/SatanDS-DuShengCDN-releases/releases/lates
   --discovery-token YOUR_DISCOVERY_TOKEN
 ```
 
-或使用节点专属 token：
+使用节点专属 token：
 
 ```bash
 curl -fsSL https://github.com/SatanDS/SatanDS-DuShengCDN-releases/releases/latest/download/install-agent.sh | bash -s -- \
@@ -135,27 +187,16 @@ curl -fsSL https://github.com/SatanDS/SatanDS-DuShengCDN-releases/releases/lates
   --agent-token YOUR_AGENT_TOKEN
 ```
 
-Agent 默认安装到 `/opt/dushengcdn-agent`。重跑安装脚本只替换二进制，并保留：
+Agent 默认安装到 `/opt/dushengcdn-agent`，服务名为 `dushengcdn-agent.service`。重跑安装脚本会替换程序文件，并保留 `agent.json`、`data`、状态、证书和观测缓冲。
 
-- `agent.json`
-- `data`
-- state
-- 证书
-- 观测缓冲
-
-清空重装必须显式执行：
+查看状态：
 
 ```bash
-curl -fsSL https://github.com/SatanDS/SatanDS-DuShengCDN-releases/releases/latest/download/install-agent.sh | bash -s -- \
-  --server-url https://cdn.example.com \
-  --agent-token YOUR_AGENT_TOKEN \
-  --reinstall \
-  --wipe-data
+systemctl status dushengcdn-agent --no-pager
+journalctl -u dushengcdn-agent -f
 ```
 
-Agent 托管目录带 `.dushengcdn-managed` marker/manifest 保护。没有标记为 DuShengCDN 专用目录时，清理未知文件会被拒绝。
-
-灰度、验收或同机多实例测试时，请同时换安装目录和服务名：
+灰度、验收或同机多实例时，请同时更换安装目录和服务名：
 
 ```bash
 curl -fsSL https://github.com/SatanDS/SatanDS-DuShengCDN-releases/releases/latest/download/install-agent.sh | bash -s -- \
@@ -165,17 +206,34 @@ curl -fsSL https://github.com/SatanDS/SatanDS-DuShengCDN-releases/releases/lates
   --service-name dushengcdn-agent-test
 ```
 
-如只想安装文件、不创建或重启 systemd 服务，追加 `--no-service`。
+确实需要清空重装时，必须显式传入 `--reinstall --wipe-data`：
+
+```bash
+curl -fsSL https://github.com/SatanDS/SatanDS-DuShengCDN-releases/releases/latest/download/install-agent.sh | bash -s -- \
+  --server-url https://cdn.example.com \
+  --agent-token YOUR_AGENT_TOKEN \
+  --reinstall \
+  --wipe-data
+```
 
 ## 安装 DNS Worker
 
-DNS Worker 用于自建权威 DNS 和 GSLB 响应。先在面板中创建 DNS 响应端并复制 token，然后执行：
+DNS Worker 用于自建权威 DNS 和 GSLB 响应。它需要公网 UDP/TCP 53 可达，并且域名 NS 已委派到对应响应端。
 
 ```bash
 curl -fsSL https://github.com/SatanDS/SatanDS-DuShengCDN-releases/releases/latest/download/install-dns-worker.sh | bash -s -- \
   --server-url https://cdn.example.com \
   --token YOUR_DNS_WORKER_TOKEN \
   --listen :53
+```
+
+指定公网监听地址：
+
+```bash
+curl -fsSL https://github.com/SatanDS/SatanDS-DuShengCDN-releases/releases/latest/download/install-dns-worker.sh | bash -s -- \
+  --server-url https://cdn.example.com \
+  --token YOUR_DNS_WORKER_TOKEN \
+  --listen 203.0.113.10:53
 ```
 
 常用选项：
@@ -187,99 +245,155 @@ curl -fsSL https://github.com/SatanDS/SatanDS-DuShengCDN-releases/releases/lates
 --force-overwrite-env
 ```
 
-重跑安装脚本会读取旧 `dns-worker.env` 作为默认值。只有显式加 `--force-overwrite-env` 时才覆盖已有配置。
+DNS Worker 默认安装到 `/opt/dushengcdn-dns-worker`，服务名为 `dushengcdn-dns-worker.service`。重跑安装脚本会读取旧 `dns-worker.env` 作为默认值；只有显式加 `--force-overwrite-env` 时才覆盖已有配置。
 
-DNS Worker 自更新不会执行 `curl | bash`。本地 updater 会先下载安装器、`.sha256`、`.sig`，通过内置 release 公钥验签后再运行。Server 只有在 Worker 回报升级成功后才清除升级请求。
+验证：
+
+```bash
+systemctl status dushengcdn-dns-worker --no-pager
+ss -lntu '( sport = :53 )'
+dig @203.0.113.10 example.com SOA
+```
 
 ## 创建第一个站点
 
-1. 登录面板，确认授权状态正常。
-2. 添加边缘节点，等待 Agent 心跳在线。
+推荐顺序：
+
+1. 登录面板，确认商业授权状态正常。
+2. 在「节点和IP池」确认至少一个 Agent 在线。
 3. 添加源站，填写业务源站地址。
 4. 创建网站或代理路由，绑定域名、源站和节点池。
-5. 申请或上传证书。
-6. 发布配置，等待 Agent 同步成功。
-7. 把业务域名 DNS 指向边缘节点或自建权威 DNS。
-8. 用浏览器和 `curl -I https://your-domain` 验证响应。
+5. 上传或申请 TLS 证书。
+6. 保存配置后，进入预览或发布版本页面检查变更。
+7. 发布并激活新版本，等待 Agent 应用成功。
+8. 将业务域名解析到边缘节点，或切换到本地自建解析。
+9. 用浏览器和 `curl -I https://your-domain` 验证访问结果。
 
-如果启用 DNS Worker，请确认：
+如果使用 DNS Worker，请额外确认：
 
 - 注册商 NS 已委派到 DNS Worker 所在服务器。
 - UDP/TCP 53 都能从公网访问。
 - 面板中的 DNS 快照版本与 Worker 心跳版本一致。
+- 多个响应端的快照版本一致，避免不同 NS 返回不一致结果。
 
 ## 升级
 
-面板版本页会读取 release 仓库。手动 Server 升级必须同时上传：
+升级前建议先备份数据库、配置文件、证书、上传目录、Agent 数据目录和 DNS Worker 快照。
 
-- Server 二进制
-- 同名 `.sha256`
-- 同名 `.sig`
+Server 升级可使用两种方式：
 
-缺少 `.sha256` 或 `.sig` 会失败。默认不允许紧急绕过签名校验。
+- 在面板版本页上传 Server 程序文件、同名 `.sha256` 和同名 `.sig`。
+- 在服务器上重跑官方安装脚本，并通过 `--version` 指定目标版本。
 
-Agent 和 DNS Worker 推荐通过面板下发升级，或重跑官方安装脚本。不要手工替换未知来源二进制。
+示例：
+
+```bash
+curl -fsSL https://github.com/SatanDS/SatanDS-DuShengCDN-releases/releases/latest/download/install-commercial.sh | bash -s -- \
+  --version v1.0.0 \
+  --install-dir /opt/dushengcdn \
+  --service-name dushengcdn \
+  --http-port 3010 \
+  --activation-url https://www.satandu.com
+```
+
+Agent 和 DNS Worker 推荐通过面板下发升级，或重跑官方安装脚本。请不要手工替换未知来源程序文件，也不要缺少 `.sha256` 或 `.sig` 时继续升级。
+
+升级后检查：
+
+```bash
+systemctl status dushengcdn --no-pager
+systemctl status dushengcdn-agent --no-pager
+systemctl status dushengcdn-dns-worker --no-pager
+```
 
 ## 回滚
 
-1. 保留上一版本二进制、`.sha256` 和 `.sig`。
-2. 回滚前备份数据库、配置文件、证书、Agent/DNS Worker 数据目录。
-3. Server 回滚使用面板上传三件套或官方安装器指定版本。
-4. Agent/DNS Worker 回滚优先重跑带签名校验的安装器。
-5. 回滚后检查授权状态、节点在线状态、DNS 快照和配置发布版本。
+1. 保留上一版本的程序文件、`.sha256` 和 `.sig`。
+2. 回滚前备份 Server 数据库、配置文件、证书、上传目录、Agent 数据和 DNS Worker 快照。
+3. Server 可通过面板上传三件套，或重跑官方安装脚本并指定上一版本。
+4. Agent 和 DNS Worker 优先重跑带签名校验的官方安装脚本。
+5. 回滚后检查授权状态、节点在线状态、DNS 快照、配置版本和应用记录。
+
+## 授权说明
+
+商业 Server 需要有效授权才能启用商业能力。授权通常通过商业授权 token 安装，并连接授权服务完成在线激活。
+
+需要注意：
+
+- Server 所在机器需要能访问安装时配置的 `--activation-url`。
+- 系统时间应保持准确，建议启用 NTP。
+- 授权会绑定机器指纹；换机、迁移或重装后可能需要走 rehost 或重新激活流程。
+- 授权到期、租约续期失败、授权被吊销或机器绑定不匹配时，商业能力可能被限制。
+- 客户包只包含程序、安装脚本、校验文件和验签所需公钥，不包含授权签发材料。
+
+## 安全与备份建议
+
+- 始终从 `SatanDS/SatanDS-DuShengCDN-releases` 下载资产。
+- 不要混用不同版本的程序文件、`.sha256` 和 `.sig`。
+- 不要把授权 token、root 密码、数据库密码写进工单、聊天记录或公开截图。
+- 面板建议只通过 HTTPS 暴露，Server 后端端口绑定本机或内网。
+- `TRUSTED_PROXIES` 只填写受控反向代理 IP/CIDR。
+- Agent 节点建议独占 80/443，不要和其它 Web 服务混用同一套 OpenResty 配置目录。
+- DNS Worker 生产环境至少部署两个公网响应端，并同时放行 UDP/TCP 53。
+- 定期备份 Server 数据库、`/opt/dushengcdn/dushengcdn.env`、上传目录、证书、Agent 数据目录、DNS Worker 配置和快照。
+- 备份文件请加密保存，并限制访问权限。
 
 ## 常见排查
 
-Server 无法登录：
+Server 无法访问：
 
 ```bash
-systemctl status dushengcdn
+systemctl status dushengcdn --no-pager
 journalctl -u dushengcdn -n 200 --no-pager
+curl -I http://127.0.0.1:3010/api/status
 ```
 
 Agent 不在线：
 
 ```bash
-systemctl status dushengcdn-agent
+systemctl status dushengcdn-agent --no-pager
 journalctl -u dushengcdn-agent -n 200 --no-pager
+curl -I https://cdn.example.com/api/status
 ```
 
 DNS Worker 无响应：
 
 ```bash
-systemctl status dushengcdn-dns-worker
+systemctl status dushengcdn-dns-worker --no-pager
 journalctl -u dushengcdn-dns-worker -n 200 --no-pager
 ss -lntu '( sport = :53 )'
 dig @YOUR_DNS_WORKER_IP example.com A +tcp
 dig @YOUR_DNS_WORKER_IP example.com A
 ```
 
-签名校验失败：
+签名或校验失败：
 
-- 确认下载来自 `SatanDS/SatanDS-DuShengCDN-releases`。
-- 确认二进制、`.sha256`、`.sig` 是同一个版本和同一个资产名。
+- 确认下载来自官方 release 页。
+- 确认程序文件、`.sha256`、`.sig` 是同一个版本和同一个资产名。
 - 不要混用预览版和稳定版资产。
-- 检查代理或镜像是否篡改下载内容。
+- 检查代理、缓存或镜像是否改写了下载内容。
 
 授权异常：
 
 - 确认 Server 可以访问授权服务。
-- 检查系统时间是否正确。
-- 确认许可证未过期、未吊销，机器 rehost 流程已完成。
-- 不要在客户环境中保存或传输 issuer 私钥。
+- 检查系统时间是否准确。
+- 确认授权未过期、未吊销。
+- 如果更换过机器，确认 rehost 或重新激活流程已完成。
 
-## 备份建议
+## 截图放置约定
 
-定期备份：
+README 中的界面预览图统一放在：
 
-- Server 数据库。
-- `/opt/dushengcdn/dushengcdn.env`。
-- 上传目录、证书和 release 缓存。
-- Agent 的 `/opt/dushengcdn-agent/agent.json` 与 `data`。
-- DNS Worker 的 `/opt/dushengcdn-dns-worker/dns-worker.env`、snapshot 和 source database 缓存。
+```text
+docs/assets/readme/
+```
 
-备份文件请加密保存，并限制访问权限。
+建议文件名：
 
-##支持
+```text
+dashboard-overview.png
+proxy-route-detail.png
+node-detail.png
+```
 
-商业授权、版本升级、部署问题和授权续约请联系 邮箱1371059663@qq.com。
+后续替换界面截图时，直接更新上述同名 PNG 文件即可，README 中的图片链接无需修改。
