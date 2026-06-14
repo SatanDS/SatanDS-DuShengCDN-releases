@@ -1,0 +1,19 @@
+dushengcdn-server-linux-amd64 filter=lfs diff=lfs merge=lfs -text
+dushengcdn-server-linux-arm64 filter=lfs diff=lfs merge=lfs -text
+dushengcdn-server-darwin-amd64 filter=lfs diff=lfs merge=lfs -text
+dushengcdn-server-darwin-arm64 filter=lfs diff=lfs merge=lfs -text
+dushengcdn-server-windows-amd64.exe filter=lfs diff=lfs merge=lfs -text
+dushengcdn-agent-linux-amd64 filter=lfs diff=lfs merge=lfs -text
+dushengcdn-agent-linux-arm64 filter=lfs diff=lfs merge=lfs -text
+dushengcdn-agent-darwin-amd64 filter=lfs diff=lfs merge=lfs -text
+dushengcdn-agent-darwin-arm64 filter=lfs diff=lfs merge=lfs -text
+dushengcdn-dns-worker-linux-amd64 filter=lfs diff=lfs merge=lfs -text
+dushengcdn-dns-worker-linux-arm64 filter=lfs diff=lfs merge=lfs -text
+dushengcdn-dns-worker-darwin-amd64 filter=lfs diff=lfs merge=lfs -text
+dushengcdn-dns-worker-darwin-arm64 filter=lfs diff=lfs merge=lfs -text
+dushengcdn-dns-worker-windows-amd64.exe filter=lfs diff=lfs merge=lfs -text
+.gitattributes text eol=lf
+*.sh text eol=lf
+*.sha256 -filter -diff -merge text eol=lf
+*.sig -filter -diff -merge text eol=lf
+VERSION.txt text eol=lf
