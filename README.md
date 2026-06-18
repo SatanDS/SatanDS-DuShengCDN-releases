@@ -331,8 +331,8 @@ curl -fsSL https://github.com/SatanDS/SatanDS-DuShengCDN-releases/releases/lates
 | `--service-name dushengcdn`     | systemd 服务名   |
 | `--http-port 3010`              | 面板监听端口        |
 | `--listen-address 0.0.0.0`      | 监听所有网卡，允许公网访问 |
-安装完成后，程序会创建 systemd 服务：
 
+安装完成后，程序会创建 systemd 服务：
 ```text
 dushengcdn
 ```
