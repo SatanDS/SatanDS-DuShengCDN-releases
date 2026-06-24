@@ -121,19 +121,7 @@ openssl rand -base64 48
 
 ## 界面预览
 
-截图请放在 `docs/assets/readme/`。之后替换截图时也建议继续使用下列文件名，README 会自动引用新图。
 
-| 预览 | 文件位置 |
-| --- | --- |
-| 管理面板总览 | `docs/assets/readme/dashboard-overview.png` |
-| 网站/代理路由详情 | `docs/assets/readme/proxy-route-detail.png` |
-| 节点详情与状态 | `docs/assets/readme/node-detail.png` |
-
-![管理面板总览](docs/assets/readme/dashboard-overview.png)
-
-![网站和代理路由详情](docs/assets/readme/proxy-route-detail.png)
-
-![节点详情与状态](docs/assets/readme/node-detail.png)
 
 ## 发布资产说明
 
