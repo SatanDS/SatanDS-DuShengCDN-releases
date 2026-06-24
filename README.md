@@ -121,16 +121,6 @@ openssl rand -base64 48
 
 ## 界面预览
 
-截图按来源文件夹分类放在 `docs/assets/readme/`。后续替换时，直接更新对应目录下的同名 PNG 即可。
-
-| 分类 | 文件夹 |
-| --- | --- |
-| 主面板 | `docs/assets/readme/主面板/` |
-| 负载均衡概览 | `docs/assets/readme/负载均衡概览/` |
-| 缓存策略 | `docs/assets/readme/缓存策略/` |
-| 自建权威DNS | `docs/assets/readme/自建权威DNS/` |
-| CC防御 | `docs/assets/readme/CC防御/` |
-
 ### 主面板
 ![主面板](docs/assets/readme/主面板/1.png)
 
