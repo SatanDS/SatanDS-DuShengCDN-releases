@@ -121,7 +121,37 @@ openssl rand -base64 48
 
 ## 界面预览
 
+截图按来源文件夹分类放在 `docs/assets/readme/`。后续替换时，直接更新对应目录下的同名 PNG 即可。
 
+| 分类 | 文件夹 |
+| --- | --- |
+| 主面板 | `docs/assets/readme/主面板/` |
+| 负载均衡概览 | `docs/assets/readme/负载均衡概览/` |
+| 缓存策略 | `docs/assets/readme/缓存策略/` |
+| 自建权威DNS | `docs/assets/readme/自建权威DNS/` |
+| CC防御 | `docs/assets/readme/CC防御/` |
+
+### 主面板
+![主面板](docs/assets/readme/主面板/1.png)
+
+### 负载均衡概览
+![负载均衡概览 1](docs/assets/readme/负载均衡概览/1.png)
+![负载均衡概览 2](docs/assets/readme/负载均衡概览/2.png)
+![负载均衡概览 3](docs/assets/readme/负载均衡概览/3.png)
+
+### 缓存策略
+![缓存策略 1](docs/assets/readme/缓存策略/1.png)
+
+### 自建权威DNS
+![自建权威DNS 1](docs/assets/readme/自建权威DNS/1.png)
+![自建权威DNS 2](docs/assets/readme/自建权威DNS/2.png)
+![自建权威DNS 3](docs/assets/readme/自建权威DNS/3.png)
+
+### CC防御
+![CC防御 1](docs/assets/readme/CC防御/1.png)
+![CC防御 2](docs/assets/readme/CC防御/2.png)
+![CC防御 3](docs/assets/readme/CC防御/3.png)
+![CC防御 4](docs/assets/readme/CC防御/4.png)
 
 ## 发布资产说明
 
@@ -1658,12 +1688,14 @@ README 中的界面预览图统一放在：
 docs/assets/readme/
 ```
 
-建议文件名：
+建议按功能分文件夹存放，例如：
 
 ```text
-dashboard-overview.png
-proxy-route-detail.png
-node-detail.png
+docs/assets/readme/主面板/
+docs/assets/readme/负载均衡概览/
+docs/assets/readme/缓存策略/
+docs/assets/readme/自建权威DNS/
+docs/assets/readme/CC防御/
 ```
 
-后续替换界面截图时，直接更新上述同名 PNG 文件即可，README 中的图片链接无需修改。
+后续替换界面截图时，直接更新对应目录下同名 PNG 文件即可，README 中的图片链接无需修改。
