@@ -1677,15 +1677,3 @@ README 中的界面预览图统一放在：
 ```text
 docs/assets/readme/
 ```
-
-建议按功能分文件夹存放，例如：
-
-```text
-docs/assets/readme/主面板/
-docs/assets/readme/负载均衡概览/
-docs/assets/readme/缓存策略/
-docs/assets/readme/自建权威DNS/
-docs/assets/readme/CC防御/
-```
-
-后续替换界面截图时，直接更新对应目录下同名 PNG 文件即可，README 中的图片链接无需修改。
