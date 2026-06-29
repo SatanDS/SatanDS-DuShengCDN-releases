@@ -643,7 +643,7 @@ curl -fsSL https://github.com/SatanDS/SatanDS-DuShengCDN-releases/releases/lates
 
 ## 十四、部署 Agent 时填写公网 Server 地址
 
-Server 公网直连后，Agent 的 `--server-url` 应该填写公网地址。
+需要先去:系统治理-运维设置-接入令牌与部署命令-面板访问地址填写你的面板地址
 
 例如 Server 地址是：
 
@@ -651,32 +651,21 @@ Server 公网直连后，Agent 的 `--server-url` 应该填写公网地址。
 http://1.2.3.4:3010
 ```
 
-那么 Agent 安装命令应为：
-
-```bash
-curl -fsSL https://github.com/SatanDS/SatanDS-DuShengCDN-releases/releases/latest/download/install-agent.sh | bash -s -- \
-  --server-url http://1.2.3.4:3010 \
-  --agent-token-file /run/secrets/dushengcdn-agent-token
+```text
+https://1.2.3.4
 ```
-
-如果使用域名：
-
-```bash
-curl -fsSL https://github.com/SatanDS/SatanDS-DuShengCDN-releases/releases/latest/download/install-agent.sh | bash -s -- \
-  --server-url http://cdn.example.com:3010 \
-  --agent-token-file /run/secrets/dushengcdn-agent-token
-```
-
-注意：这里使用的是 `http://`，不是 `https://`。
-
+当使用https是需要做好前置反代到对应的端口
 因为公网直连模式没有经过 HTTPS 反向代理。
+填写完之后回边缘资源-边缘节点创建边缘池-节点详情-详情-节点信息-Rotate token
+之后复制安装脚本到边缘节点机器运行出现Agent token时回面板复制到边缘节点即可（在边缘节点里token是不可见状态粘贴一次就好）
+等待Agent心跳自动刷新或者手动点击同步就会出现边缘节点信息了
 
 ---
 
 ## 十五、部署 DNS Worker 时填写公网 Server 地址
 
 DNS Worker 同样需要连接 Server。
-
+步骤和边缘节点部署差不多复制面板命令即可
 示例：
 
 ```bash
