@@ -1,4 +1,4 @@
-<img width="288" height="512" alt="image" src="https://github.com/user-attachments/assets/80014f8c-8b87-4295-b4a1-df9e5acebc98" /># DuShengCDN 商业版
+# DuShengCDN 商业版
 
 DuShengCDN 是一个面向自有边缘节点的 CDN 管理平台，用于把多台自有服务器统一组织成可视化 CDN 网络。项目提供中心管理端、边缘 Agent、可选自建权威 DNS Worker，以及配套的二进制安装脚本，帮助用户完成站点代理、缓存分发、HTTPS 证书、节点管理、配置发布、访问日志、GSLB 调度和安全治理。
 
