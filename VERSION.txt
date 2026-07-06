@@ -1,2 +1,2 @@
-v1.0.41
-source=c57b126
+v1.0.42
+source=286fb0e
