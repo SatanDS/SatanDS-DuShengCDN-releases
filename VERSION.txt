@@ -1,2 +1,2 @@
-v1.0.48
-source=4ebc3ab
+v1.0.49
+source=caf47ad
